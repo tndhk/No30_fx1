@@ -1,0 +1,5 @@
+oandapyV20
+pandas
+python-dotenv
+pytest
+requests
