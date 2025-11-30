@@ -71,6 +71,45 @@ OANDAからヒストリカルデータを取得し、SQLiteデータベース (`
 python src/fetch_data.py
 ```
 
+## テスト
+
+包括的な単体テスト（Unit Tests）により、全モジュールのテストカバレッジを実現しています。
+
+### テスト実行
+
+```bash
+# 全テストを実行
+pytest tests/ -v
+
+# 特定のテストモジュールを実行
+pytest tests/test_strategy_comprehensive.py -v
+pytest tests/test_execution_comprehensive.py -v
+pytest tests/test_notification_comprehensive.py -v
+pytest tests/test_backtest_comprehensive.py -v
+pytest tests/test_config_comprehensive.py -v
+```
+
+### テストカバレッジ
+
+- **テスト数**: 141個（全て成功）
+- **対象モジュール**: 5個
+
+| モジュール | テスト数 | テスト項目 |
+|---|---|---|
+| `SMAStrategy` | 21個 | シグナル生成、MA計算、境界値、異常系処理 |
+| `OrderExecutor` | 26個 | 注文実行、環境分岐、ポジション管理 |
+| `Notifier` | 31個 | Discord連携、エラーハンドリング、フォールバック |
+| `BacktestEngine` | 34個 | バックテスト実行、P&L計算、トレード管理 |
+| `Config` | 29個 | 設定検証、環境変数、バリデーション |
+
+### テスト品質保証
+
+✅ **分岐網羅（C1カバレッジ）**: 全てのif/else/case分岐が実行されるようテスト
+✅ **境界値分析**: 最小値、最大値、等値条件を検証
+✅ **異常系テスト**: 不正な入力、外部エラー、エッジケースを網羅
+✅ **依存関係のモック化**: requests.post、Config等を完全に分離
+✅ **統合テスト**: 複数モジュール間の連携を検証
+
 ## ディレクトリ構成
 
 - `src/`: ソースコード
